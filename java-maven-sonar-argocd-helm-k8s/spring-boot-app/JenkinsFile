@@ -30,7 +30,7 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "Demo-cicd:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "demo-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
@@ -40,7 +40,7 @@ pipeline {
             def dockerImage = docker.image("${DOCKER_IMAGE}")
             //docker.withRegistry('https://index.docker.io/v1/', "docker-cred")
             withDockerRegistry(credentialsId: 'docker-cred'){
-                sh "docker push Demo-cicd"
+                sh "docker push demo-cicd"
                 //dockerImage.push()
             }
         }
